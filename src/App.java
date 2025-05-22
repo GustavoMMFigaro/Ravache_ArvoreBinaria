@@ -5,11 +5,12 @@ public class App {
 
         arvore.inserir("A");
         arvore.inserir("B");
-        arvore.inserir("C");
         arvore.inserir("D");
         arvore.inserir("E");
+        arvore.inserir("C");
         arvore.inserir("F");
 
-        System.out.println("Total de nós na árvore binária: " + arvore.contarNos());
+        System.out.println("Árvore binária em pré-ordem: ");
+        arvore.preOrdem();
     }
 }

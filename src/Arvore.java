@@ -20,4 +20,17 @@ public class Arvore {
         }
         return atual;
     }
+
+    public void preOrdem() {
+        preOrdemRec(raiz);
+        System.out.println();
+    }
+
+    private void preOrdemRec(No no) {
+        if (no != null) {
+            System.out.print(no.valor + " ");
+            preOrdemRec(no.esquerda);
+            preOrdemRec(no.direita);
+        }
+    }
 }
