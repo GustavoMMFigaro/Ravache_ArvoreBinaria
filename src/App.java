@@ -6,5 +6,8 @@ public class App {
 
         System.out.println("\nÁrvore escrita em pré-ordem: ");
         arvore.preOrdem();
+
+        System.out.println("\nÁrvore escrita em em-ordem: ");
+        arvore.emOrdem();
     }
 }

@@ -48,4 +48,17 @@ public class Arvore {
             preOrdemRec(no.direita);
         }
     }
+
+       public void emOrdem() {
+        emOrdemRec(raiz);
+        System.out.println();
+    }
+
+    private void emOrdemRec(No no) {
+        if (no != null) {
+            emOrdemRec(no.esquerda);
+            System.out.print(no.valor + " ");
+            emOrdemRec(no.direita);
+        }
+    }
 }
