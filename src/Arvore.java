@@ -1,36 +1,26 @@
 public class Arvore {
     private No raiz;
 
-    public Arvore(No raiz) {
-        this.raiz = null;
+    public Arvore() {
+        construirArvore();
     }
 
-    public void inserir(String valor) {
-    raiz = inserirRec(raiz, valor);
-    }
+    private void construirArvore() {
+        No A = new No("A");
+        No B = new No("B");
+        No C = new No("C");
+        No D = new No("D");
+        No E = new No("E");
+        No F = new No("F");
 
-    private No inserirRec(No atual, String valor) {
-        if (atual == null) {
-            return new No(valor);
-        }
-        if (valor.compareTo(atual.valor) < 0) {
-            atual.esquerda = inserirRec(atual.esquerda, valor);
-        } else if (valor.compareTo(atual.valor) > 0) {
-            atual.direita = inserirRec(atual.direita, valor);
-        }
-        return atual;
-    }
+        A.esquerda = B;
+        A.direita = C;
 
-    public void preOrdem() {
-        preOrdemRec(raiz);
-        System.out.println();
-    }
+        B.esquerda = D;
+        B.direita = E;
 
-    private void preOrdemRec(No no) {
-        if (no != null) {
-            System.out.print(no.valor + " ");
-            preOrdemRec(no.esquerda);
-            preOrdemRec(no.direita);
-        }
+        C.direita = F;
+
+        this.raiz = A;
     }
 }
