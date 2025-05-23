@@ -3,5 +3,8 @@ public class App {
         Arvore arvore = new Arvore();
 
         System.out.println("Total de nós na árvore binária: " + arvore.contarNos());
+
+        System.out.println("\nÁrvore escrita em pré-ordem: ");
+        arvore.preOrdem();
     }
 }

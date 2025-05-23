@@ -35,4 +35,17 @@ public class Arvore {
     }
         return 1 + contarNosRec(no.esquerda) + contarNosRec(no.direita);
     }
+
+    public void preOrdem() {
+        preOrdemRec(raiz);
+        System.out.println();
+    }
+
+    private void preOrdemRec(No no) {
+        if (no != null) {
+            System.out.print(no.valor + " ");
+            preOrdemRec(no.esquerda);
+            preOrdemRec(no.direita);
+        }
+    }
 }
