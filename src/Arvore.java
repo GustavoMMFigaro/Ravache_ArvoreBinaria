@@ -23,4 +23,16 @@ public class Arvore {
 
         this.raiz = A;
     }
+
+        public int contarNos() {
+        return contarNosRec(raiz);
+    }
+
+
+    private int contarNosRec(No no) {
+    if (no == null) {
+        return 0;
+    }
+        return 1 + contarNosRec(no.esquerda) + contarNosRec(no.direita);
+    }
 }
