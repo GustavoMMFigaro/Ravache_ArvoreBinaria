@@ -9,5 +9,8 @@ public class App {
 
         System.out.println("\nÁrvore escrita em em-ordem: ");
         arvore.emOrdem();
+
+        System.out.println("\nÁrvore escrita em pós-ordem: ");
+        arvore.posOrdem();
     }
 }
