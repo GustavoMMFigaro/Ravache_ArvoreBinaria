@@ -74,4 +74,33 @@ public class Arvore {
             System.out.print(no.valor + " ");
         }
     }
+
+    public void emNivel() {
+        int altura = altura(raiz);
+        for (int i = 1; i <= altura; i++) {
+            imprimirNivel(raiz, i);
+        }
+        System.out.println();
+    }
+
+    private void imprimirNivel(No no, int nivel) {
+        if (no == null) {
+            return;
+        }
+        if (nivel == 1) {
+            System.out.print(no.valor + " ");
+        } else if (nivel > 1) {
+            imprimirNivel(no.esquerda, nivel - 1);
+            imprimirNivel(no.direita, nivel - 1);
+        }
+    }
+
+    private int altura(No no) {
+        if (no == null) {
+            return 0;
+        }
+        int alturaEsq = altura(no.esquerda);
+        int alturaDir = altura(no.direita);
+        return 1 + Math.max(alturaEsq, alturaDir);
+    }
 }

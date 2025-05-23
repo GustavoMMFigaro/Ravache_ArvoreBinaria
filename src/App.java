@@ -12,5 +12,8 @@ public class App {
 
         System.out.println("\nÁrvore escrita em pós-ordem: ");
         arvore.posOrdem();
+
+        System.out.println("\nÁrvore escrita em em-nível: ");
+        arvore.emNivel();
     }
 }
