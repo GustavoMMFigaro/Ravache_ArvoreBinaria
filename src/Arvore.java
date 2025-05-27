@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class Arvore {
@@ -79,7 +81,7 @@ public class Arvore {
         }
     }
 
-   public void emOrdem() {
+    public void emOrdem() {
         emOrdemIterativo(raiz);
         System.out.println();
     }
@@ -105,7 +107,7 @@ public class Arvore {
         }
     }
 
-public void posOrdem() {
+    public void posOrdem() {
         posOrdemIterativo(raiz);
         System.out.println();
     }
@@ -139,31 +141,29 @@ public void posOrdem() {
     }
 
     public void emNivel() {
-        int altura = altura(raiz);
-        for (int i = 1; i <= altura; i++) {
-            imprimirNivel(raiz, i);
-        }
+        emNivelIterativo(raiz);
         System.out.println();
     }
 
-    private void imprimirNivel(No no, int nivel) {
-        if (no == null) {
+    private void emNivelIterativo(No noInicial) {
+        if (noInicial == null) {
             return;
         }
-        if (nivel == 1) {
-            System.out.print(no.valor + " ");
-        } else if (nivel > 1) {
-            imprimirNivel(no.esquerda, nivel - 1);
-            imprimirNivel(no.direita, nivel - 1);
-        }
-    }
 
-    private int altura(No no) {
-        if (no == null) {
-            return 0;
+        Queue<No> fila = new LinkedList<>();
+        fila.add(noInicial);
+
+        while (!fila.isEmpty()) {
+            No atual = fila.poll();
+            System.out.print(atual.valor + " ");
+
+            if (atual.esquerda != null) {
+                fila.add(atual.esquerda);
+            }
+
+            if (atual.direita != null) {
+                fila.add(atual.direita);
+            }
         }
-        int alturaEsq = altura(no.esquerda);
-        int alturaDir = altura(no.direita);
-        return 1 + Math.max(alturaEsq, alturaDir);
     }
 }
