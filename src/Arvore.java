@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class Arvore {
     private No raiz;
 
@@ -24,16 +26,31 @@ public class Arvore {
         this.raiz = A;
     }
 
-        public int contarNos() {
-        return contarNosRec(raiz);
+    public int contarNos() {
+        return contarNosIterativo(raiz);
     }
 
+    private int contarNosIterativo(No noInicial) {
+        if (noInicial == null) {
+            return 0;
+        }
 
-    private int contarNosRec(No no) {
-    if (no == null) {
-        return 0;
-    }
-        return 1 + contarNosRec(no.esquerda) + contarNosRec(no.direita);
+        int contador = 0;
+        Stack<No> pilha = new Stack<>();
+        pilha.push(noInicial);
+
+        while (!pilha.isEmpty()) {
+            No atual = pilha.pop();
+            contador++;
+
+            if (atual.direita != null) {
+                pilha.push(atual.direita);
+            }
+            if (atual.esquerda != null) {
+                pilha.push(atual.esquerda);
+            }
+        }
+        return contador;
     }
 
     public void preOrdem() {
