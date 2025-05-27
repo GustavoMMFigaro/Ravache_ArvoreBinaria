@@ -54,15 +54,28 @@ public class Arvore {
     }
 
     public void preOrdem() {
-        preOrdemRec(raiz);
+        preOrdemIterativo(raiz);
         System.out.println();
     }
 
-    private void preOrdemRec(No no) {
-        if (no != null) {
-            System.out.print(no.valor + " ");
-            preOrdemRec(no.esquerda);
-            preOrdemRec(no.direita);
+    private void preOrdemIterativo(No noInicial) {
+        if (noInicial == null) {
+            return;
+        }
+
+        Stack<No> pilha = new Stack<>();
+        pilha.push(noInicial);
+
+        while (!pilha.isEmpty()) {
+            No atual = pilha.pop();
+            System.out.print(atual.valor + " ");
+
+            if (atual.direita != null) {
+                pilha.push(atual.direita);
+            }
+            if (atual.esquerda != null) {
+                pilha.push(atual.esquerda);
+            }
         }
     }
 
