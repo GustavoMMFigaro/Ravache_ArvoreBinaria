@@ -79,16 +79,29 @@ public class Arvore {
         }
     }
 
-    public void emOrdem() {
-        emOrdemRec(raiz);
+   public void emOrdem() {
+        emOrdemIterativo(raiz);
         System.out.println();
     }
 
-    private void emOrdemRec(No no) {
-        if (no != null) {
-            emOrdemRec(no.esquerda);
-            System.out.print(no.valor + " ");
-            emOrdemRec(no.direita);
+    private void emOrdemIterativo(No noInicial) {
+        if (noInicial == null) {
+            return;
+        }
+
+        Stack<No> pilha = new Stack<>();
+        No atual = noInicial;
+
+        while (atual != null || !pilha.isEmpty()) {
+            while (atual != null) {
+                pilha.push(atual);
+                atual = atual.esquerda;
+            }
+
+            atual = pilha.pop();
+            System.out.print(atual.valor + " ");
+
+            atual = atual.direita;
         }
     }
 
