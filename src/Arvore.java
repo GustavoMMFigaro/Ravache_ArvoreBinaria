@@ -55,6 +55,35 @@ public class Arvore {
         return contador;
     }
 
+    public int contarNosFolha() {
+        return contarNosFolhaIterativo(raiz);
+    }
+
+    private int contarNosFolhaIterativo(No noInicial) {
+        if (noInicial == null) {
+            return 0;
+        }
+
+        int contadorFolhas = 0;
+        Stack<No> pilha = new Stack<>();
+        pilha.push(noInicial);
+
+        while (!pilha.isEmpty()) {
+            No atual = pilha.pop();
+            if (atual.esquerda == null && atual.direita == null) {
+                contadorFolhas++;
+            }
+
+            if (atual.direita != null) {
+                pilha.push(atual.direita);
+            }
+            if (atual.esquerda != null) {
+                pilha.push(atual.esquerda);
+            }
+        }
+        return contadorFolhas;
+    }
+
     public void preOrdem() {
         preOrdemIterativo(raiz);
         System.out.println();
