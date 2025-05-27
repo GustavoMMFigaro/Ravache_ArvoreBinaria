@@ -105,16 +105,36 @@ public class Arvore {
         }
     }
 
-    public void posOrdem() {
-        posOrdemRec(raiz);
+public void posOrdem() {
+        posOrdemIterativo(raiz);
         System.out.println();
     }
 
-    private void posOrdemRec(No no) {
-        if (no != null) {
-            posOrdemRec(no.esquerda);
-            posOrdemRec(no.direita);
-            System.out.print(no.valor + " ");
+    private void posOrdemIterativo(No noInicial) {
+        if (noInicial == null) {
+            return;
+        }
+
+        Stack<No> s1 = new Stack<>();
+        Stack<No> s2 = new Stack<>();
+
+        s1.push(noInicial);
+
+        while (!s1.isEmpty()) {
+            No temp = s1.pop();
+            s2.push(temp);
+
+            if (temp.esquerda != null) {
+                s1.push(temp.esquerda);
+            }
+            if (temp.direita != null) {
+                s1.push(temp.direita);
+            }
+        }
+
+        while (!s2.isEmpty()) {
+            No temp = s2.pop();
+            System.out.print(temp.valor + " ");
         }
     }
 
