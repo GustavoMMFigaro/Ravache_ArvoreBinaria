@@ -6,6 +6,8 @@ public class App {
 
         System.out.println("\nNúmero de nós folha da árvore binária: " + arvore.contarNosFolha());
 
+        System.out.println("\nNúmero de nós folha da árvore binária: " + arvore.contarNosFolha2());
+
         System.out.println("\nÁrvore escrita em pré-ordem: ");
         arvore.preOrdem();
 

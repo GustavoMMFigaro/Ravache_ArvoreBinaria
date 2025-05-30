@@ -84,6 +84,21 @@ public class Arvore {
         return contadorFolhas;
     }
 
+    public int contarNosFolha2() {
+        return contarNosFolhaRec(raiz);
+    }
+
+
+    private int contarNosFolhaRec(No no) {
+        if (no == null) {
+            return 0;
+        }
+        if (no.esquerda == null && no.direita == null) {
+            return 1;
+        }
+        return contarNosFolhaRec(no.direita) + contarNosFolhaRec(no.esquerda);
+    }
+
     public void preOrdem() {
         preOrdemIterativo(raiz);
         System.out.println();
