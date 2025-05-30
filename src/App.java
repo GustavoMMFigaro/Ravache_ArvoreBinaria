@@ -4,9 +4,11 @@ public class App {
 
         System.out.println("Total de nós na árvore binária: " + arvore.contarNos());
 
-        System.out.println("\nNúmero de nós folha da árvore binária: " + arvore.contarNosFolha());
+        System.out.println("\nNúmero de nós folha da árvore binária(Iterativo): " + arvore.contarNosFolha());
 
-        System.out.println("\nNúmero de nós folha da árvore binária: " + arvore.contarNosFolha2());
+        System.out.println("\nNúmero de nós folha da árvore binária(Recursivo): " + arvore.contarNosFolha2());
+
+        System.out.println("\nNúmero de nós folha da árvore binária (Fila): " + arvore.contarNosFolha3());
 
         System.out.println("\nÁrvore escrita em pré-ordem: ");
         arvore.preOrdem();

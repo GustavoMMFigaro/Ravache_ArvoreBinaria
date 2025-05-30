@@ -99,6 +99,35 @@ public class Arvore {
         return contarNosFolhaRec(no.direita) + contarNosFolhaRec(no.esquerda);
     }
 
+    public int contarNosFolha3() {
+        return contarNosFolhaFila(raiz);
+    }
+
+    private int contarNosFolhaFila(No noInicial) {
+        if (noInicial == null) {
+            return 0;
+        }
+
+        int contadorFolhas = 0;
+        Queue<No> fila = new LinkedList<>();
+        fila.add(noInicial);
+
+        while (!fila.isEmpty()) {
+            No atual = fila.remove();
+            if (atual.esquerda == null && atual.direita == null) {
+                contadorFolhas++;
+            }
+
+            if (atual.direita != null) {
+                fila.add(atual.direita);
+            }
+            if (atual.esquerda != null) {
+                fila.add(atual.esquerda);
+            }
+        }
+        return contadorFolhas;
+    }
+
     public void preOrdem() {
         preOrdemIterativo(raiz);
         System.out.println();
