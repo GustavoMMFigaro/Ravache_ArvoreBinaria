@@ -1,6 +1,7 @@
 public class App {
     public static void main(String[] args) throws Exception {
         Arvore arvore = new Arvore();
+        ArvoreAvl arvoreAvl = new ArvoreAvl();
 
         System.out.println("Total de nós na árvore binária: " + arvore.contarNos());
 
@@ -21,5 +22,8 @@ public class App {
 
         System.out.println("\nÁrvore escrita em em-nível: ");
         arvore.emNivel();
+
+        System.out.println("\nÁrvore AVL em em-ordem: ");
+        arvoreAvl.printEmOrdemAvl();
     }
 }
