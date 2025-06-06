@@ -1,12 +1,9 @@
 public class NoAvl {
-    int valor;
-    int altura; 
-    NoAvl direita;
-    NoAvl esquerda;
+    int chave, altura;
+    NoAvl direita, esquerda;
 
-    public NoAvl(int valor) {
-        this.valor = valor;
-        this.altura = 1;
-        esquerda = direita = null;
+    NoAvl(int valor) {
+        chave = valor;
+        altura = 1;
     }
 }

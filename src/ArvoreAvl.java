@@ -25,21 +25,21 @@ public class ArvoreAvl {
     }
 
 
-    public int altura(NoAvl N){
-        return (N == null) ? 0 : N.altura;
+    public int altura(NoAvl no){
+        return (no == null) ? 0 : no.altura;
     }
 
 
-    public int pegarBalanceamento(NoAvl N) {
-        return (N == null) ? 0 : altura(N.esquerda) - altura(N.direita);
+    public int fatorBalanceamento(NoAvl no) {
+        return (no == null) ? 0 : altura(no.esquerda) - altura(no.direita);
     }
 
     public NoAvl rotacionarDireita(NoAvl y) {
         NoAvl x = y.esquerda;
-        NoAvl T2 = x.direita;
+        NoAvl VarTemp = x.direita;
 
         x.direita = y;
-        y.esquerda = T2;
+        y.esquerda = VarTemp;
 
         y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
         x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
@@ -48,12 +48,12 @@ public class ArvoreAvl {
     }
 
 
-        public NoAvl rotacionarEsquerda(NoAvl x) {
+    public NoAvl rotacionarEsquerda(NoAvl x) {
         NoAvl y = x.direita;
-        NoAvl T2 = y.esquerda;
+        NoAvl VarTemp = y.esquerda;
 
         y.esquerda = x;
-        x.direita = T2;
+        x.direita = VarTemp;
 
         x.altura = Math.max(altura(x.esquerda), altura(x.direita)) + 1;
         y.altura = Math.max(altura(y.esquerda), altura(y.direita)) + 1;
@@ -62,29 +62,30 @@ public class ArvoreAvl {
     }
 
 
-    public NoAvl inserir(NoAvl no, int valor) {
-        if (no == null) return new NoAvl(valor);
-        if (valor < no.valor)
-            no.esquerda = inserir(no.esquerda, valor);
-        else if (valor > no.valor)
-            no.direita = inserir(no.direita, valor);
+    public NoAvl inserir(NoAvl no, int chave) {
+        if (no == null)
+            return new NoAvl(chave);
+        if (chave < no.chave)
+            no.esquerda = inserir(no.esquerda, chave);
+        else if (chave > no.chave)
+            no.direita = inserir(no.direita, chave);
         else
             return no;
 
 
         no.altura = 1 + Math.max(altura(no.esquerda), altura(no.direita));
 
-        int balanceamento = pegarBalanceamento(no);
+        int balanceamento = fatorBalanceamento(no);
 
-        if (balanceamento > 1 && valor < no.esquerda.valor) 
+        if (balanceamento > 1 && chave < no.esquerda.chave) 
             return rotacionarDireita(no);
-        if (balanceamento < 1 && valor > no.direita.valor) 
+        if (balanceamento < 1 && chave > no.direita.chave) 
             return rotacionarEsquerda(no);
-        if (balanceamento > 1 && valor > no.esquerda.valor) {
+        if (balanceamento > 1 && chave > no.esquerda.chave) {
             no.esquerda = rotacionarEsquerda(no.esquerda);
             return rotacionarDireita(no);   
         }     
-        if (balanceamento < -1 && valor < no.direita.valor) {
+        if (balanceamento < -1 && chave < no.direita.chave) {
             no.direita = rotacionarDireita(no.direita);
             return rotacionarEsquerda(no);
         }
@@ -92,10 +93,47 @@ public class ArvoreAvl {
         return no;
     }
 
+    private NoAvl menorValor(NoAvl no) {
+        NoAvl atual = no;
+        while (atual.esquerda != null)
+            atual = atual.esquerda;
+        return atual;
+    }
+
+    public NoAvl exclusao(NoAvl no, int chave) {
+        if (no == null) 
+            return null;
+        if (chave < no.chave) {
+            no.esquerda = exclusao(no.esquerda, chave);
+        } else if (chave > no.chave) {
+            no.direita = exclusao(no.direita, chave);
+        } else {
+            if (no.esquerda == null) return no.direita;
+            if (no.direita == null) return no.esquerda;
+
+            NoAvl sucessor = menorValor(no.direita);
+            no.chave = sucessor.chave;
+            no.direita = exclusao(no.direita, sucessor.chave);
+        }
+
+        no.altura = 1 + Math.max(altura(no.esquerda), altura(no.direita));
+
+        int balanceamento = fatorBalanceamento(no);
+
+        if (balanceamento > 1 && fatorBalanceamento(no.esquerda) >= 0)
+            return rotacionarDireita(no);
+
+        if (balanceamento < -1 && fatorBalanceamento(no.direita) <= 0)
+            return rotacionarEsquerda(no);
+
+
+        return no;
+    }
+
     private void emOrdemAvl(NoAvl no) {
         if (no != null) {
             emOrdemAvl(no.esquerda);
-            System.out.print(no.valor + " ");
+            System.out.print(no.chave + " ");
             emOrdemAvl(no.direita);
         }
     }
