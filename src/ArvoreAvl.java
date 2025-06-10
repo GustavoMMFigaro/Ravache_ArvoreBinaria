@@ -1,29 +1,5 @@
 public class ArvoreAvl {
-    private NoAvl raiz;
-
-    public ArvoreAvl() {
-        construirArvore();
-    }
-
-    private void construirArvore() {
-        NoAvl A = new NoAvl(1);
-        NoAvl B = new NoAvl(2);
-        NoAvl C = new NoAvl(3);
-        NoAvl D = new NoAvl(4);
-        NoAvl E = new NoAvl(5);
-        NoAvl F = new NoAvl(6);
-
-        A.esquerda = B;
-        A.direita = C;
-
-        B.esquerda = D;
-        B.direita = E;
-
-        C.direita = F;
-
-        this.raiz = A;
-    }
-
+    public NoAvl raiz;
 
     public int altura(NoAvl no){
         return (no == null) ? 0 : no.altura;
@@ -138,7 +114,7 @@ public class ArvoreAvl {
         }
     }
 
-    public void printEmOrdemAvl() {
+    public void printEmOrdemAvl(NoAvl no) {
         emOrdemAvl(raiz);
         System.out.println();
     }

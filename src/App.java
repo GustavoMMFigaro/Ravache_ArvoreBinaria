@@ -23,7 +23,13 @@ public class App {
         System.out.println("\nÁrvore escrita em em-nível: ");
         arvore.emNivel();
 
+        int[] chaves = {10, 20, 30, 40, 50, 25};
+
+        for (int chave : chaves) {
+            arvoreAvl.raiz = arvoreAvl.inserir(arvoreAvl.raiz, chave);
+        }
+
         System.out.println("\nÁrvore AVL em em-ordem: ");
-        arvoreAvl.printEmOrdemAvl();
+        arvoreAvl.printEmOrdemAvl(arvoreAvl.raiz);
     }
 }
