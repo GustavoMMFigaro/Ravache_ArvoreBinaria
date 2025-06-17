@@ -2,6 +2,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         Arvore arvore = new Arvore();
         ArvoreAvl arvoreAvl = new ArvoreAvl();
+        ArvoreRedBlack arvoreRB = new ArvoreRedBlack();
 
         System.out.println("Total de nós na árvore binária: " + arvore.contarNos());
 
@@ -31,5 +32,19 @@ public class App {
 
         System.out.println("\nÁrvore AVL em em-ordem: ");
         arvoreAvl.printEmOrdemAvl(arvoreAvl.raiz);
+
+        int[] chavesRB = {10, 20, 30, 15, 5, 25};
+        for (int chave : chavesRB) {
+            arvoreRB.inserir(chave);
+        }
+
+        System.out.println("\nArvore em ordem: ");
+        arvoreRB.emOrdemRedBlack();
+
+        arvoreRB.exclusao(15);
+        arvoreRB.exclusao(10);
+
+        System.out.println("\nArvore em ordem: ");
+        arvoreRB.emOrdemRedBlack();
     }
 }
