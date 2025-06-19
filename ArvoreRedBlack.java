@@ -1,17 +1,24 @@
 public class ArvoreRedBlack {
     private NoRedBlack raiz;
-    private NoRedBlack NoNull;
+    private final NoRedBlack NoNull;
+
+    public ArvoreRedBlack() {
+        NoNull = new NoRedBlack(-1);
+        NoNull.cor = Cor.preto;
+        NoNull.esquerda = NoNull.direita = NoNull.pai = NoNull;
+        raiz = NoNull;
+    }
 
     public void rotacionarDireita(NoRedBlack y) {
         NoRedBlack x = y.esquerda;
         y.esquerda = x.direita;
-        if (x.direita != null) {
+        if (x.direita != NoNull) {
             x.direita.pai = y;
         }
 
         x.pai = y.pai;
 
-        if (y.pai == null) {
+        if (y.pai == NoNull) {
             raiz = x;
         } else if (y == y.pai.direita) {
             y.pai.direita = x;
@@ -28,13 +35,13 @@ public class ArvoreRedBlack {
     public void rotacionarEsquerda(NoRedBlack x) {
         NoRedBlack y = x.direita;
         x.direita = y.esquerda;
-        if (y.esquerda != null) {
+        if (y.esquerda != NoNull) {
             y.esquerda.pai = x;
         }
 
         y.pai = x.pai;
 
-        if (x.pai == null) {
+        if (x.pai == NoNull) {
             raiz = y;
         } else if (x == x.pai.esquerda) {
             x.pai.esquerda = y;
@@ -47,16 +54,16 @@ public class ArvoreRedBlack {
     }
 
 
-    public void inserir(int chave) {
-        NoRedBlack no = new NoRedBlack(chave);
-        no.esquerda = no.direita = no.pai = null;
+    public void inserir(int chaveRB) {
+        NoRedBlack no = new NoRedBlack(chaveRB);
+        no.esquerda = no.direita = no.pai = NoNull;
         
-        NoRedBlack y = null;
+        NoRedBlack y = NoNull;
         NoRedBlack x = raiz;
 
-        while (x != null) {
+        while (x != NoNull) {
             y = x;
-            if (no.chave < x.chave) {
+            if (no.chaveRB < x.chaveRB) {
                 x = x.esquerda;
             } else {
                 x = x.direita;
@@ -64,23 +71,23 @@ public class ArvoreRedBlack {
         }
 
         no.pai = y;
-        if (y == null) {
+        if (y == NoNull) {
             raiz = no;
-        } else if (no.chave < y.chave) {
+        } else if (no.chaveRB < y.chaveRB) {
             y.esquerda = no;
         } else {
             y.direita = no;
         }
 
-        no.esquerda = null;
-        no.direita = null;
+        no.esquerda = NoNull;
+        no.direita = NoNull;
         no.cor = Cor.vermelho;
 
         insertFix(no);
     }
 
     private void insertFix(NoRedBlack k) {
-        while (k.pai != null && k.pai.cor == Cor.vermelho) {
+        while (k.pai != NoNull && k.pai.cor == Cor.vermelho) {
             if (k.pai == k.pai.pai.esquerda) {
                 NoRedBlack u = k.pai.pai.direita;
                 if (u.cor == Cor.vermelho) {
@@ -120,24 +127,26 @@ public class ArvoreRedBlack {
     }
 
     private void transplante(NoRedBlack u, NoRedBlack v) {
-        if (u.pai == null) {
+        if (u.pai == NoNull) {
             raiz = v;
         } else if (u == u.pai.esquerda) {
             u.pai.esquerda = v;
-        } else u.pai.direita = v;
+        } else {
+            u.pai.direita = v;
+        }
         v.pai = u.pai;
     }
 
     private NoRedBlack minimo(NoRedBlack no) {
-        while (no.esquerda != null) {
+        while (no.esquerda != NoNull) {
             no = no.esquerda;
         }
         return no;
     }
 
-    public void exclusao(int chave) {
-        NoRedBlack z = searchtree(raiz, chave);
-        if (z == null) {
+    public void exclusao(int chaveRB) {
+        NoRedBlack z = searchtree(raiz, chaveRB);
+        if (z == NoNull) {
             return;
         }
 
@@ -145,10 +154,10 @@ public class ArvoreRedBlack {
         Cor yCorOriginal = y.cor;
         NoRedBlack x;
 
-        if (z.esquerda == null) {
+        if (z.esquerda == NoNull) {
             x = z.direita;
             transplante(z, z.direita);
-        } else if (z.direita == null) {
+        } else if (z.direita == NoNull) {
             x = z.esquerda;
             transplante(z, z.esquerda);
         } else {
@@ -227,14 +236,14 @@ public class ArvoreRedBlack {
         }
     }
 
-    private NoRedBlack searchtree(NoRedBlack no, int chave) {
-        if (no == null || chave == no.chave) {
+    private NoRedBlack searchtree(NoRedBlack no, int chaveRB) {
+        if (no == NoNull || chaveRB == no.chaveRB) {
             return no;
         }
-        if (chave < no.chave) {
-            return searchtree(no.esquerda, chave);
+        if (chaveRB < no.chaveRB) {
+            return searchtree(no.esquerda, chaveRB);
         }
-        return searchtree(no.direita, chave);
+        return searchtree(no.direita, chaveRB);
     }
 
     public void emOrdemRedBlack() {
@@ -243,10 +252,10 @@ public class ArvoreRedBlack {
     }
 
     private void helperEmOrdemRedBlack(NoRedBlack no) {
-        if (no != null) {
+        if (no != NoNull) {
             helperEmOrdemRedBlack(no.esquerda);
             String sufixoCor = (no.cor == Cor.vermelho) ? "R" : "B";
-            System.out.println(no.chave + sufixoCor + " ");
+            System.out.print(no.chaveRB + sufixoCor + " ");
             helperEmOrdemRedBlack(no.direita);
         }
     }

@@ -34,17 +34,17 @@ public class App {
         arvoreAvl.printEmOrdemAvl(arvoreAvl.raiz);
 
         int[] chavesRB = {10, 20, 30, 15, 5, 25};
-        for (int chave : chavesRB) {
-            arvoreRB.inserir(chave);
+        for (int chaveRB : chavesRB) {
+            arvoreRB.inserir(chaveRB);
         }
 
-        System.out.println("\nArvore em ordem: ");
+        System.out.println("\nArvore rubro-negra em ordem: ");
         arvoreRB.emOrdemRedBlack();
 
         arvoreRB.exclusao(15);
         arvoreRB.exclusao(10);
 
-        System.out.println("\nArvore em ordem: ");
+        System.out.println("\nArvore rubro-negra em ordem após exclusões: ");
         arvoreRB.emOrdemRedBlack();
     }
 }

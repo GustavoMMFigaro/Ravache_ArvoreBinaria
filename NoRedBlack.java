@@ -3,12 +3,12 @@ enum Cor {
 }
 
 class NoRedBlack {
-    int chave;
+    int chaveRB;
     NoRedBlack direita, esquerda, pai;
     Cor cor;
 
-    NoRedBlack(int valor) {
-        this.chave = chave;
+    NoRedBlack(int chaveRB) {
+        this.chaveRB = chaveRB;
         this.cor = Cor.vermelho;
         this.esquerda = null;
         this.direita = null;
